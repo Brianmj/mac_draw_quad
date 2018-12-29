@@ -2,14 +2,13 @@
 
 layout(location = 0) in vec4 position;
 
-uniform mat4 projection_mat;
-uniform mat4 modelview_mat;
 uniform mat4 mvp;
 
-mat4 gen_matrix(float left, float right, float bottom, float top, float near, float far)
+//mat4 gen_matrix(float left, float right, float bottom, float top, float near, float far)
+mat4 gen_matrix()
 {
     
-    float a = (2 * near) / (right - left);
+    /*float a = (2 * near) / (right - left);
     float b = (2 * near) / (top - bottom);
     float c = (right + left) / (right - left);
     float d = (top + bottom) / (top - bottom);
@@ -19,17 +18,23 @@ mat4 gen_matrix(float left, float right, float bottom, float top, float near, fl
     return mat4(a, 0.0f, 0.0f, 0.0f,
                 0.0f, b, 0.0f, 0.0f,
                 c, d, e, -1.0f,
-                0.0f, 0.0f, f, 0.0f);
+                0.0f, 0.0f, f, 0.0f);*/
+    
+    mat4 t;
+    t[0] = vec4(1.0f, 0.0f, 0.0f, 0.0f);
+    t[1] = vec4(0.0f, 1.0f, 0.0f, 0.0f);
+    t[2] = vec4(0.0f, 0.0f, 1.0f, 0.0f);
+    t[3] = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    
+    return t;
 }
 
 
 void main()
 {
+
     
-    mat4 m = modelview_mat;
-    mat4 p = projection_mat;
-    
-    gl_Position =   mvp * position;
+    gl_Position =  gen_matrix() * mvp * position;
     /*mat4 perspective = (projection_mat);
     perspective = gen_matrix(-9.0f, 9.0f, -9.0f, 9.0f, 0.1f, 100.0f);
     

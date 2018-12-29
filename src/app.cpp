@@ -38,7 +38,7 @@ void App::draw_scene()
 	glClearBufferfv(GL_COLOR, 0, clear_color);
 	glClearBufferfv(GL_DEPTH, 0, &clear_depth);
     
-    matrix4f modelview = matrix4f::translation_matrix(0.0f, 0.0f, -5.0f);
+    matrix4f modelview = matrix4f::translation_matrix(0.0f, 0.0f, -2.0f);
     matrix4f mvp =  modelview * perspective_matrix;
     glProgramUniformMatrix4fv(quad_program.obj(), mvp_uniform, 1, true, mvp.data());
     
@@ -73,8 +73,8 @@ void App::load_shaders()
     quad_program.add_fragment_file(frag_shader);
     quad_program.build();
     
-    model_uniform = quad_program.uniform("modelview_mat");
-    proj_uniform = quad_program.uniform("projection_mat");
+    //model_uniform = quad_program.uniform("modelview_mat");
+    //proj_uniform = quad_program.uniform("projection_mat");
     mvp_uniform = quad_program.uniform("mvp");
 }
 
